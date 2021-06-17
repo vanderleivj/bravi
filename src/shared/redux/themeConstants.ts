@@ -1,0 +1,3 @@
+export const SET_THEME = 'SET_THEME'
+
+export const GET_THEME_SETTINGS = 'GET_THEME_SETTINGS'
