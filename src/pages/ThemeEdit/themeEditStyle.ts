@@ -4,14 +4,25 @@ export const Background = styled.div`
   display:flex;
   flex-direction:column;
   width:100%;
- 
+  height:100vh;
 `;
 
 export const ThemeHeader = styled.div`
   margin-bottom:50px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:90%;
 
   h1{
     font-size: 4.5em
+  }
+
+  button{
+    border-radius:5px;
+    border-width:0px;
+    padding:0px 5px;
+    height:50px;
   }
 `;
 
@@ -20,7 +31,7 @@ export const ThemeCards = styled.button`
   flex-direction:column;
   justify-content:space-between;
   align-items:center;
-  height:300px;
+  min-height:300px;
   min-width:250px;
   box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.08);
   border-radius: 16px;
@@ -38,17 +49,33 @@ export const ThemeCards = styled.button`
     padding:5px;
     justify-content:center
   }
+`;
 
-  &:hover {
-    opacity: 0.5;
-    min-height:320px;
-    min-width:260px;
+export const Column = styled.div`
+  display:flex;
+  flex-direction:column;
+  flex-wrap: wrap;
+  justify-content:center;
+`;
+
+export const ColorRow = styled.div`
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:15px;
+
+  div{
+    display:flex;
+    flex-direction:column;
   }
 `;
 
-export const Row = styled.div`
-  display:flex;
-  flex-direction:row;
-  flex-wrap: wrap;
-  justify-content:center;
+export const ColorSelected = styled.button`
+  height:40px;
+  width:100px;
+  border-radius:5px;
+  margin-top:10px;
+  border-width:0px;
+
 `;

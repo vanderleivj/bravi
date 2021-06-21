@@ -1,4 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+//React Imports
+import { useEffect, useState } from 'react'
+
 //Css
 import { ThemeHeader,ThemeCards,Background,Row } from './themeSelectionStyle'
 
@@ -8,26 +10,34 @@ import { BraviHeader } from '../../shared/components/BraviHeader/braviHeader'
 
 //Redux
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { getThemeSettings,setTheme } from '../../shared/redux/themeActions'
+import { getThemeSettings,setTheme,isApiTrue } from '../../shared/redux/themeActions'
+
 
 export function ThemeSelection() {
   const dispatch = useDispatch()
+
   const initialSettings = useSelector((state:RootStateOrAny) => state.ThemeReducer.initialSettings ?? [] )
   const themeConfig = useSelector((state:RootStateOrAny) => state.ThemeReducer.themeSettings)
   const newThemes = useSelector((state:RootStateOrAny) => state.ThemeReducer.newThemesSettings ?? [])
+  const callApi = useSelector((state:RootStateOrAny) => state.ThemeReducer.isCallApi )
+  console.log('chegou aqui',newThemes)
 
   useEffect(() => {
     dispatch(setTheme(initialSettings))
-    dispatch(getThemeSettings())
+    if(callApi){
+      dispatch(getThemeSettings())
+      dispatch(isApiTrue(false))
+    }
   }, [])
-  console.log({initialSettings})
+
   return (
-    <Background style={{background:themeConfig ? themeConfig.background_color : initialSettings.background_color }}>
+    <Background style={{background:themeConfig ? themeConfig.background_color : initialSettings.background_color}}>
       <BraviHeader 
         background={themeConfig ? themeConfig.accent_color : initialSettings.accent_color }
         name={themeConfig ? themeConfig.name : initialSettings.name}
         color={themeConfig ? themeConfig.primary_text_color : initialSettings.primary_text_color}
+        buttonRef='/theme-edit'
+        buttonName='Adicionar novo tema'
       />
       <BraviContainer 
         flexDirection='column'
